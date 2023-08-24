@@ -36,7 +36,7 @@ resource "aws_db_parameter_group" "main" {
 resource "aws_rds_cluster" "main" {
   cluster_identifier               = "${local.name_pre}-cluster"
   db_subnet_group_name             = aws_db_subnet_group.main.name
-  database_name                    = data.aws_ssm_parameter.dbname.name
+  database_name                    = data.aws_ssm_parameter.dbname.value
   master_username                  = data.aws_ssm_parameter.username.name
   master_password                  = data.aws_ssm_parameter.password.name
   backup_retention_period          = var.backup_retention_period
