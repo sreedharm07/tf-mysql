@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "main" {
   name       = "${local.name_pre}-mysql-subnet"
-  subnet_ids = [var.subnets_ids]
+  subnet_ids = var.subnets_ids
   tags = merge(local.tags,{Name="${local.name_pre}-mysql-subnet"})
 }
 
