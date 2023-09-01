@@ -32,7 +32,6 @@ resource "aws_db_parameter_group" "main" {
   name   = "rds-pg"
   family = var.family
 }
-
 resource "aws_rds_cluster" "main" {
   cluster_identifier               = "${local.name_pre}-cluster"
   db_subnet_group_name             = aws_db_subnet_group.main.name
@@ -50,3 +49,11 @@ resource "aws_rds_cluster" "main" {
   tags = merge(local.tags,{Name="${local.name_pre}-mysql-cluster"})
 }
 
+resource "aws_rds_cluster_instance" "cluster_instances" {
+  count              = 1
+  identifier         = "${local.name_pre}-cluster-instance-${count.index + 1}"
+  cluster_identifier = aws_rds_cluster.main.id
+  instance_class     = "db.t3.small"
+  engine             = aws_rds_cluster.main.engine
+  engine_version     = aws_rds_cluster.main.engine_version
+}
