@@ -13,3 +13,4 @@ variable "preferred_backup_window" {}
 variable "engine_version" {}
 variable "engine" {}
 variable "skip_final_snapshot" {}
+variable "kms_key_id" {}

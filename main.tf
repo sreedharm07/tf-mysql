@@ -44,9 +44,11 @@ resource "aws_rds_cluster" "main" {
   db_instance_parameter_group_name = aws_db_parameter_group.main.name
   engine_version                   = var.engine_version
   engine                           = var.engine
-  skip_final_snapshot = var.skip_final_snapshot
+  skip_final_snapshot              = var.skip_final_snapshot
+  storage_encrypted                = true
+  kms_key_id                       = var.kms_key_id
 
-  tags = merge(local.tags,{Name="${local.name_pre}-mysql-cluster"})
+  tags = merge(local.tags, { Name = "${local.name_pre}-mysql-cluster" })
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
