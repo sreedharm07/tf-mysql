@@ -29,7 +29,7 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_db_parameter_group" "main" {
-  name   = "rds-pg"
+  name   = "rds-${local.name_pre}-pg"
   family = var.family
 }
 resource "aws_rds_cluster" "main" {
